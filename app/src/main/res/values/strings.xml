@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Ohio State Fit Leaders</string>
+    <string name="check_in">Check - In</string>
+    <string name="please_complete_the_following_survey_before_continuing">Please complete the following survey before continuing:</string>
+    <string name="qualtrics_survey">Qualtrics Survey</string>
+    <string name="go">Go!</string>
+    <string name="calendar">Calendar</string>
+    <string name="scheduling_information"><![CDATA[Scheduling & Information]]></string>
+    <string name="work_out_descriptions">Work Out Descriptions</string>
+    <string name="your_data">Your Data</string>
+    <string name="log_in">Log In</string>
+    <string name="please_enter_your_participant_i_d">Please enter your Participant I.D.</string>
+    <string name="back">Back</string>
+    <string name="activity_1">Activity 1</string>
+    <string name="activity_3">Activity 3</string>
+    <string name="activity_4">Activity 4</string>
+    <string name="activity_5">Activity 5</string>
+    <string name="work_out">Work Out</string>
+    <string name="fit_leaders">Fit Leaders</string>
+    <string name="catalog">Catalog</string>
+    <string name="activity_2">Activity 2</string>
+    <string name="data_2">Data 2</string>
+    <string name="string_data_2" />
+    <string name="calories">Calories</string>
+    <string name="data">Data</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="steps">Steps</string>
+    <string name="continue_on">Continue</string>
+    <string name="title_activity_main_wear">MainWearActivity</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="finish">Finish!</string>
+    <string name="finished">Finished!</string>
+    <string name="steps_taken">Steps Taken</string>
+    <string name="StepCounter">TextView</string>
+</resources>
