@@ -2,4 +2,16 @@
     <string name="app_name">OhioStateFitLeadersWear</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
+    <string name="HeartRateText">-</string>
+    <string name="StepsText">--</string>
+    <string name="LocationText">Unactive</string>
+    <string name="step_counter">
+         android.hardware.sensor.stepcounter
+   </string>
+
+
+    <string name="step_detector">
+         android.hardware.sensor.stepdetector
+   </string>
+
 </resources>

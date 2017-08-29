@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.webkit.WebView;
+import android.webkit.WebSettings;
 
 public class SurveyActivity extends AppCompatActivity {
 
@@ -12,6 +14,11 @@ public class SurveyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+
+        WebView myWebView = (WebView) findViewById(R.id.Survey);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("https://osu.az1.qualtrics.com/jfe/form/SV_6KKyV9Fkrm0tygl");
 
         Button btn = (Button) findViewById(R.id.SurveyContinue);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -24,5 +31,6 @@ public class SurveyActivity extends AppCompatActivity {
             }
 
         });
+
     }
 }

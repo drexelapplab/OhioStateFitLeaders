@@ -17,31 +17,14 @@
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/Survey"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="25dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/QualtricsButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="163dp"
-        android:layout_height="61dp"
-        android:backgroundTint="@color/ohiostateorange"
-        android:text="@string/qualtrics_survey"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/SurveyContinue"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="97dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="95dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/SurveyContinue"
@@ -50,10 +33,28 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/ohiostateorange"
         android:text="@string/continue_on"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/Survey"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <WebView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/Survey"
+        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="33dp"
-        app:layout_constraintRight_toRightOf="@+id/QualtricsButton"
-        android:layout_marginBottom="192dp" />
+        android:layout_marginEnd="19dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="91dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="91dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

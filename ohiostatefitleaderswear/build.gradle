@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.ohiostatefitleaderswear"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -24,5 +24,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-fitness:11.0.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.google.android.support:wearable:2.0.4'
+    compile 'com.google.android.wearable:wearable:2.0.4'
     compile 'com.google.android.gms:play-services-wearable:11.0.4'
 }
