@@ -33,15 +33,11 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (context.getResources().getConfiguration().isScreenRound()) {
-            setContentView(R.layout.round_activity_main);
-        } else {
             setContentView(R.layout.rect_activity_main);
-        }
         TextView Time = findViewById(R.id.Time);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-        Time.setText(currentDateTimeString);
+        String format = currentDateTimeString.replaceAll("[\r\n]+", " ");
+        Time.setText(format);
 
         textView = findViewById(R.id.Steps);
         SensorManager = (SensorManager)
