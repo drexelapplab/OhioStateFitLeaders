@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/ohiostateorange"
+        android:textColor="@color/white"
         android:text="@string/finished"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

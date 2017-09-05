@@ -34,7 +34,6 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp" />
 
     <ProgressBar
@@ -59,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/ohiostateorange"
+        android:textColor="@color/white"
         android:text="@string/back"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"

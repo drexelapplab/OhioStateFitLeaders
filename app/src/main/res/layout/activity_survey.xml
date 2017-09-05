@@ -32,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/ohiostateorange"
+        android:textColor="@color/white"
         android:text="@string/continue_on"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"

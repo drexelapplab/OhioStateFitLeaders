@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/ohiostateorange"
+        android:textColor="@color/white"
         android:text="@string/go"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
@@ -56,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ohiostateorange"
+            android:textColor="@color/white"
             android:text="@string/calendar"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="30dp" />
@@ -69,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ohiostateorange"
+            android:textColor="@color/white"
             android:text="@string/work_out_descriptions"
             tools:layout_editor_absoluteX="129dp"
             tools:layout_editor_absoluteY="188dp" />
@@ -82,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/ohiostateorange"
+            android:textColor="@color/white"
             android:text="@string/your_data"
             tools:layout_editor_absoluteX="128dp"
             tools:layout_editor_absoluteY="326dp" />
