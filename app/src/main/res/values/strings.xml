@@ -33,4 +33,6 @@
     <string name="finished">Finished!</string>
     <string name="steps_taken">Steps Taken</string>
     <string name="StepCounter">TextView</string>
+    <string name="connectStatus">Connected!</string>
+    <string name="stepsTaken">1586</string>
 </resources>
