@@ -3,121 +3,120 @@ package com.example.ohiostatefitleaderswear;
 import android.app.Activity;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
-import android.support.wearable.view.WatchViewStub;
-import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.hardware.SensorManager;
 import android.hardware.Sensor;
-import android.content.res.Configuration;
-import android.content.Context;
 import android.hardware.SensorEvent;
 import java.util.Date;
 import java.text.DateFormat;
+import java.util.Vector;
+
 import android.util.Log;
-import android.hardware.SensorEventListener;
 
 
 public class MainActivity extends Activity implements SensorEventListener {
 
-    TextView textView;
-    private SensorManager SensorManager;
-    private Sensor SensorStepCounter;
-    private Sensor StepDetector;
-    TextView mTextViewHeart;
-    private SensorManager mSensorManager;
-    private Sensor mHeartRateSensor;
-    private SensorEventListener sensorEventListener;
+    TextView heartTextView;     // Text view for displaying heart rate
+    TextView stepsTextView;     // Text view for displaying step count since start of app
+
+    private SensorManager mSensorManager;   // Sensor manager for heart monitor
+
+    private Sensor stepCounter;        // Step detector
+    private Sensor heartRateSensor;     // Heart rate sensor
+
+    private Vector<Integer> heartRateData;
+    private Vector<Integer> stepData;
+    private int initialStepCount = 0;
+
     String TAG;
-    Context context = this;
+
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Initalizations
         super.onCreate(savedInstanceState);
-            setContentView(R.layout.rect_activity_main);
+        heartRateData = new Vector<>();
+        stepData = new Vector<>();
+
+        // For debugging purposes keep the screen on
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // Set view
+        setContentView(R.layout.rect_activity_main);
+
+        // Display time and date for the header
         TextView Time = findViewById(R.id.Time);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         String format = currentDateTimeString.replaceAll("[\r\n]+", " ");
         Time.setText(format);
 
-        textView = findViewById(R.id.Steps);
-        SensorManager = (SensorManager)
-                getSystemService(Context.SENSOR_SERVICE);
-        SensorStepCounter = SensorManager
-                .getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        StepDetector = SensorManager
-                .getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+        mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
+
+        // Set up heart rate monitor
+        heartTextView = findViewById(R.id.HeartRate);
+        heartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
+        heartTextView.setText("Waiting...");
+
+        // Set up pedometer
+        stepsTextView = findViewById(R.id.Steps);
+        stepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        stepsTextView.setText("Waiting...");
+
+        // Register listeners for heart rate and pedometer sensors
+        mSensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_NORMAL);
+        Log.i(TAG, "LISTENER REGISTERED.");
     }
 
     public void onSensorChanged(SensorEvent event) {
+        String msg;
         Sensor sensor = event.sensor;
-        float[] values = event.values;
-        int value = -1;
 
-        if (values.length > 0) {
-            value = (int) values[0];
+        if (event.values.length > 0) {
+
+            switch (sensor.getType()){
+                case Sensor.TYPE_STEP_COUNTER:
+                    if (initialStepCount == 0){
+                        initialStepCount = (int) event.values[0];
+                    }
+
+                    int stepsTaken = (int) event.values[0] - initialStepCount;
+                    stepData.addElement((int) event.values[0]);
+                    msg = String.valueOf(stepsTaken);
+                    stepsTextView.setText(msg);
+                    Log.d(TAG, "Steps Taken: " + String.valueOf(stepData.lastElement()));
+                    break;
+                case Sensor.TYPE_HEART_RATE:
+                    heartRateData.addElement((int) event.values[0]);
+                    msg = "" + (int) event.values[0];
+                    heartTextView.setText(msg);
+                    Log.d(TAG, "Heart Rate: " + String.valueOf(heartRateData.lastElement()));
+                    break;
+                default:
+                    Log.d(TAG, "Unknown sensor type");
+                    break;
+            }
         }
-
-        if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            textView.setText("Step Counter Detected : " + value);
-        } else if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
-            // For test only. Only allowed value is 1.0 i.e. for step taken
-            textView.setText("Step Detector Detected : " + value);
-        }
-
-        mTextViewHeart = (TextView) findViewById(R.id.HeartRate);
-        mSensorManager = ((SensorManager) getSystemService(SENSOR_SERVICE));
-        mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
-        mSensorManager.registerListener(this, mHeartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(TAG, "LISTENER REGISTERED.");
-        mTextViewHeart.setText("Something here");
-
-
-        mSensorManager.registerListener(sensorEventListener, mHeartRateSensor, mSensorManager.SENSOR_DELAY_FASTEST);
-
-        //Heart Rate
-        if (event.sensor.getType() == Sensor.TYPE_HEART_RATE) {
-            String msg = "" + (int)event.values[0];
-            mTextViewHeart.setText(msg);
-            Log.d(TAG, msg);
-        }
-        else
-            Log.d(TAG, "Unknown sensor type");
-
     }
 
     protected void onResume() {
-
         super.onResume();
-
-        SensorManager.registerListener(this, SensorStepCounter,
-
-                SensorManager.SENSOR_DELAY_FASTEST);
-        SensorManager.registerListener(this, StepDetector,
-
-                SensorManager.SENSOR_DELAY_FASTEST);
-
+        mSensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
-
-        protected void onStop() {
-            super.onStop();
-            SensorManager.unregisterListener(this, SensorStepCounter);
-            SensorManager.unregisterListener(this, StepDetector);
-        }
-
-
+    protected void onStop() {
+        super.onStop();
+        mSensorManager.unregisterListener(this, stepCounter);
+        mSensorManager.unregisterListener(this, heartRateSensor);
+    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        //do nothing???
         Log.d(TAG, "onAccuracyChanged - accuracy: " + accuracy);
     }
-
-    /* new Handler().postDelayed(new Runnable() {
-        public void run() {
-            // call JSON methods here
-            new MyAsyncTask().execute();
-        }
-    }, 60000);
-*/
 }

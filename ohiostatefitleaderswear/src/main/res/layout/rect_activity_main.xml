@@ -9,13 +9,11 @@
     <TextView
         android:id="@+id/Time"
         android:layout_width="match_parent"
-        android:lines = "2"
-        android:inputType="textMultiLine"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.36"
         android:gravity="center"
-        android:text="10:30 PM"
-        android:textAppearance="@android:style/TextAppearance.Holo.Small"
-        android:layout_weight="0.36" />
+        android:lines="2"
+        android:textAppearance="@android:style/TextAppearance.Holo.Small" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,14 +27,16 @@
             android:layout_width="106dp"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            android:src="@drawable/heart" />
+            android:src="@drawable/heart"
+            android:contentDescription="@string/heartRateText"/>
 
         <ImageButton
             android:id="@+id/imageButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            android:src="@drawable/footsies" />
+            android:src="@drawable/footsies"
+            android:contentDescription="@string/stepCountText"/>
 
     </LinearLayout>
 
@@ -50,15 +50,15 @@
             android:layout_width="106dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Heart Rate" />
+            android:text="@string/heartRateText" />
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Steps" />
+            android:text="@string/stepCountText" />
 
     </LinearLayout>
 
@@ -73,7 +73,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.38"
             android:gravity="center"
-            android:text="@string/HeartRateText" />
+            android:text="@string/heartRateValue" />
 
         <TextView
             android:id="@+id/Steps"
@@ -81,7 +81,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.30"
             android:gravity="center"
-            android:text="@string/StepsText" />
+            android:text="@string/stepsValue" />
 
     </LinearLayout>
 
