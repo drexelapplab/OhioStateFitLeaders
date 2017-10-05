@@ -25,11 +25,11 @@ public class MainActivity extends Activity implements SensorEventListener {
     private Sensor stepCounter;        // Step detector
     private Sensor heartRateSensor;     // Heart rate sensor
 
-    private Vector<Integer> heartRateData;
-    private Vector<Integer> stepData;
-    private int initialStepCount = 0;
+    private Vector<Integer> heartRateData;  // Vector to store heart rate samples
+    private Vector<Integer> stepData;       // Vector to store step counts
+    private int initialStepCount = 0;       // Helper variable to get accurate step count
 
-    String TAG;
+    String TAG = "MainActivity";            // Tag for logger
 
     public MainActivity() {
     }
