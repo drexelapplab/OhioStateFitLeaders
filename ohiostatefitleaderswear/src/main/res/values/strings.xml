@@ -3,8 +3,17 @@
     <string name="heartRateValue">--</string>
     <string name="stepsValue">--</string>
     <string name="locationText">Inactive</string>
-    <string name="stepCountText">Step Count</string>
-    <string name="heartRateText">Heart Rate</string>
+    <string name="stepCountText">Steps</string>
+    <string name="heartRateText">HR</string>
     <string name="step_counter">android.hardware.sensor.stepcounter</string>
     <string name="step_detector">android.hardware.sensor.stepdetector</string>
+    <string name="connectBtnText">End Session</string>
+    <string name="startBtnText">Start</string>
+    <string name="title_activity_activate">Activate</string>
+    <string name="welcomeText">Welcome to the FitLeaders App. Enter your user ID and then Press Start to begin tracking.</string>
+    <string name="title_activity_thank_you">ThankYou</string>
+    <string name="thankYouText">Thanks for participating.</string>
+    <string name="startOverButton">New Session</string>
+    <string name="ok">Ok</string>
+    
 </resources>

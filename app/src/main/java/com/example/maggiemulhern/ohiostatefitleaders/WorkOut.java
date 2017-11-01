@@ -14,13 +14,13 @@ public class WorkOut extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_out);
 
-        Button Finish = (Button) findViewById(R.id.Finish);
+        Button Finish = findViewById(R.id.Finish);
         Finish.setEnabled(false);
-        CheckBox Activity1 = (CheckBox) findViewById((R.id.Activity1));
-        CheckBox Activity2 = (CheckBox) findViewById((R.id.Activity2));
-        CheckBox Activity3 = (CheckBox) findViewById((R.id.Activity3));
-        CheckBox Activity4 = (CheckBox) findViewById((R.id.Activity4));
-        CheckBox Activity5 = (CheckBox) findViewById((R.id.Activity5));
+        CheckBox Activity1 = findViewById((R.id.Activity1));
+        CheckBox Activity2 = findViewById((R.id.Activity2));
+        CheckBox Activity3 = findViewById((R.id.Activity3));
+        CheckBox Activity4 = findViewById((R.id.Activity4));
+        CheckBox Activity5 = findViewById((R.id.Activity5));
 
         if (Activity1.isChecked() && Activity2.isChecked() && Activity3.isChecked() && Activity4.isChecked() && Activity5.isChecked()) {
             Finish.setEnabled(true);

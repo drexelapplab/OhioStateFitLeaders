@@ -15,12 +15,12 @@ public class SurveyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
 
-        WebView myWebView = (WebView) findViewById(R.id.Survey);
+        WebView myWebView = findViewById(R.id.Survey);
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         myWebView.loadUrl("https://osu.az1.qualtrics.com/jfe/form/SV_6KKyV9Fkrm0tygl");
 
-        Button btn = (Button) findViewById(R.id.SurveyContinue);
+        Button btn = findViewById(R.id.SurveyContinue);
         btn.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -13,7 +13,7 @@ public class Catalog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
-        Button Back = (Button) findViewById(R.id.BackButton);
+        Button Back = findViewById(R.id.BackButton);
         Back.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -13,9 +13,9 @@ public class ScheduleInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_info);
 
-        Button Calendar = (Button) findViewById(R.id.Calendar);
-        Button WorkOut = (Button) findViewById(R.id.Workouts);
-        Button DataButton = (Button) findViewById(R.id.Data);
+        Button Calendar = findViewById(R.id.Calendar);
+        Button WorkOut = findViewById(R.id.Workouts);
+        Button DataButton = findViewById(R.id.Data);
         Calendar.setOnClickListener(new View.OnClickListener() {
 
             @Override
