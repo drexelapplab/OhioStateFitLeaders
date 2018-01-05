@@ -26,18 +26,18 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="80dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/heartRateText" />
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/stepCountText" />
+                <!--<TextView-->
+                    <!--android:id="@+id/textView8"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@string/stepCountText" />-->
 
             </LinearLayout>
 
@@ -48,19 +48,19 @@
 
                 <TextView
                     android:id="@+id/HeartRate"
-                    android:layout_width="40dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.38"
                     android:gravity="center"
                     android:text="@string/heartRateValue" />
 
-                <TextView
-                    android:id="@+id/Steps"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.30"
-                    android:gravity="center"
-                    android:text="@string/stepsValue" />
+                <!--<TextView-->
+                    <!--android:id="@+id/Steps"-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1.30"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@string/stepsValue" />-->
 
             </LinearLayout>
 

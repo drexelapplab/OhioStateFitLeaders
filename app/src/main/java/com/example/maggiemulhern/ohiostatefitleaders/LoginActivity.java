@@ -1,20 +1,25 @@
 package com.example.maggiemulhern.ohiostatefitleaders;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import java.lang.String;
 
 
-public class LogIn extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
+
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
@@ -32,22 +37,8 @@ public class LogIn extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String email = emailValidate.getText().toString();
-                if (email.matches(emailPattern)) {
-                    btn.setEnabled(true);
-                    btn.setOnClickListener(new View.OnClickListener() {
-
-                        public void onClick(View v) {
-                            Intent i = new Intent(LogIn.this,
-                                    SurveyActivity.class);
-                            // Set certain emails to be put through and others not
-                            startActivity(i);
-                        }
-
-                    });
-                }
+                //nothing
             }
-
 
 
             @Override
@@ -59,14 +50,21 @@ public class LogIn extends AppCompatActivity {
                     btn.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View v) {
-                            Intent i = new Intent(LogIn.this,
-                                    SurveyActivity.class);
+
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putBoolean("LoggedIn", true);
+                            editor.apply();
+
+                            Log.d(TAG, "Set LoggedIn to true");
+
+                            Intent i = new Intent(LoginActivity.this, TabbedActivity.class);
                             startActivity(i);
                         }
 
                     });
                 }
             }
-    });
+        });
     }
 }

@@ -35,4 +35,13 @@
     <string name="StepCounter">TextView</string>
     <string name="connectStatus">Connected!</string>
     <string name="stepsTaken">1586</string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="workout_text">You may begin your workout. Please press the button below at the end of your routine.</string>
+    <string name="startWorkoutBtnText">Finished Workout!</string>
+    <string name="final_text">Thank you for participating. You may now close this app.</string>
 </resources>

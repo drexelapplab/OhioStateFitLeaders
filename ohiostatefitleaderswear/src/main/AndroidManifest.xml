@@ -21,6 +21,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".Activate"
             android:label="@string/title_activity_activate">
@@ -53,7 +56,16 @@
 
         <activity
             android:name=".ThankYou"
-            android:label="@string/title_activity_thank_you"/>
+            android:label="@string/title_activity_thank_you" />
+
+
+        <service android:name=".WearMessageListenerService">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/start_activity" />
+            </intent-filter>
+        </service>
 
     </application>
 

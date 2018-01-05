@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -32,12 +33,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Wearable;
+import com.google.android.gms.wearable.WearableListenerService;
 
 import org.json.JSONObject;
 
-public class MainActivity extends Activity implements SensorEventListener {
+public class MainActivity extends Activity implements SensorEventListener,
+        MessageApi.MessageListener,
+        GoogleApiClient.ConnectionCallbacks {
 
     private static final String TAG = "MainActivity";   // Tag for logger
+    private static final String WEAR_MESSAGE_PATH = "/message";
 
     private TextView heartTextView;     // Text view for displaying heart rate
     private TextView stepsTextView;     // Text view for displaying step count since start of app
@@ -58,6 +67,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private Vector<String> accelReadingTimes;   // Vector to store step count timestamps
 
     private int initialStepCount = 0;       // Helper variable to get accurate step count
+    private GoogleApiClient mApiClient;
 
     public MainActivity() {
     }
@@ -69,10 +79,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         super.onCreate(savedInstanceState);
 
         heartRateData = new Vector<>();
-        stepData = new Vector<>();
+//        stepData = new Vector<>();
         heartRateReadingTimes = new Vector<>();
-        stepCountReadingTimes = new Vector<>();
-        accelReadingTimes = new Vector<>();
+//        stepCountReadingTimes = new Vector<>();
+//        accelReadingTimes = new Vector<>();
 
         Bundle bundle = getIntent().getExtras();
 
@@ -101,23 +111,23 @@ public class MainActivity extends Activity implements SensorEventListener {
         heartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
         heartTextView.setText("Waiting...");
 
-        // Set up pedometer
-        stepsTextView = findViewById(R.id.Steps);
-        stepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        stepsTextView.setText("Waiting...");
+//        // Set up pedometer
+//        stepsTextView = findViewById(R.id.Steps);
+//        stepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+//        stepsTextView.setText("Waiting...");
 
-        // Set up accelerometers
-        accelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+//        // Set up accelerometers
+//        accelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 
         // Register listeners for heart rate and pedometer sensors
         mSensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
         Log.i(TAG, "HR listener registered.");
 
-        mSensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(TAG, "SC listener registered.");
-
-        mSensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(TAG, "AS listener registered.");
+//        mSensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_NORMAL);
+//        Log.i(TAG, "SC listener registered.");
+//
+//        mSensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_NORMAL);
+//        Log.i(TAG, "AS listener registered.");
 
         final Button submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -187,17 +197,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_NORMAL);
+//        mSensorManager.registerListener(this, stepCounter, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_NORMAL);
+//        mSensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
 
     protected void onStop() {
         super.onStop();
-        mSensorManager.unregisterListener(this, stepCounter);
+//        mSensorManager.unregisterListener(this, stepCounter);
         mSensorManager.unregisterListener(this, heartRateSensor);
-        mSensorManager.unregisterListener(this, accelSensor);
+//        mSensorManager.unregisterListener(this, accelSensor);
     }
 
     public void sendData() {
@@ -211,10 +221,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         Map<String,String> params = new HashMap<>();
         params.put("hrData",heartRateData.toString());
         params.put( "hrTimeData", heartRateReadingTimes.toString());
-        params.put("stepData",stepData.toString());
-        params.put( "stepTimeData", stepCountReadingTimes.toString());
-        params.put("accelData", accelData.substring(0, accelData.length() - 2));
-        params.put("accelTimeData", accelReadingTimes.toString());
+//        params.put("stepData",stepData.toString());
+//        params.put( "stepTimeData", stepCountReadingTimes.toString());
+//        params.put("accelData", accelData.substring(0, accelData.length() - 2));
+//        params.put("accelTimeData", accelReadingTimes.toString());
         params.put("userID", userID);
 
         // Create a JSON Object
@@ -270,5 +280,20 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         Log.d(TAG, "onAccuracyChanged - accuracy: " + accuracy);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Wearable.MessageApi.addListener( mApiClient, this );
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onMessageReceived(MessageEvent messageEvent) {
+
     }
 }
