@@ -1,6 +1,7 @@
 package com.example.ohiostatefitleaderswear;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.text.Editable;
@@ -39,6 +40,14 @@ public class Activate extends WearableActivity {
 //
 //        AlertDialog dialog = builder.create();
 
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+
+        if(pref.getBoolean("LoggedIn", true)){
+            Intent i = new Intent(this, StartWorkout.class);
+            startActivity(i);
+            finish();
+        }
+
         userID.addTextChangedListener(new TextWatcher() {
                                           @Override
                                           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -65,7 +74,12 @@ public class Activate extends WearableActivity {
 
             public void onClick(View v) {
 
-                Intent i = new Intent(Activate.this, MainActivity.class);
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("LoggedIn", true);
+                editor.apply();
+
+                Intent i = new Intent(Activate.this, StartWorkout.class);
                 i.putExtra("userID", userID.getText().toString());
                 startActivity(i);
             }
