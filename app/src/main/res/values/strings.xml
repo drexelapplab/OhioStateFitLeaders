@@ -41,7 +41,8 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
-    <string name="workout_text">You may begin your workout. Please press the button below at the end of your routine.</string>
+    <string name="workout_text">You may begin your workout. Please activate the FitLeaders app on your watch and begin your workout.  Press the button below at the end of your routine.</string>
     <string name="startWorkoutBtnText">Finished Workout!</string>
     <string name="final_text">Thank you for participating. You may now close this app.</string>
+    <string name="start_session">Start Session</string>
 </resources>

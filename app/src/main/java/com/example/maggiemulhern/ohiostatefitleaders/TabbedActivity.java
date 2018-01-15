@@ -9,8 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 
-//public class TabbedActivity extends AppCompatActivity implements OnFragmentInteractionListener{
-
 public class TabbedActivity extends AppCompatActivity {
 
     public static final String TAG = "TabbedActivity";
@@ -27,13 +25,13 @@ public class TabbedActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.container);
         setupViewPager(mViewPager);
 
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+//        TabLayout tabLayout = findViewById(R.id.tabs);
+//        tabLayout.setupWithViewPager(mViewPager);
     }
 
     private void setupViewPager(ViewPager viewPager){
         mSectionPageAdapter.addFragment(new RootFragment(), "Start New Session");
-        mSectionPageAdapter.addFragment(new DataFragment(), "Previous Sessions");
+//        mSectionPageAdapter.addFragment(new DataFragment(), "Previous Sessions");
         viewPager.setAdapter(mSectionPageAdapter);
     }
 

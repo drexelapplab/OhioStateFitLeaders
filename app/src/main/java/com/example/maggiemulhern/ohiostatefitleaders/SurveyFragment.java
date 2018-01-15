@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -44,6 +46,18 @@ public class SurveyFragment extends Fragment {
         WebView myWebView = rootView.findViewById(R.id.Survey);
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        // Set WebView client
+        myWebView.setWebChromeClient(new WebChromeClient());
+
+        myWebView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
 
         switch (getArguments().getInt("surveyType")) {
             case 0:

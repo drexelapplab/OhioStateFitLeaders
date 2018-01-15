@@ -24,7 +24,7 @@ public class RootFragment extends Fragment {
 		 * "real" fragment
 		 */
 
-		Fragment newFragment = SurveyFragment.newInstance(0);
+		Fragment newFragment = new StartFragment();
 
         transaction.replace(R.id.root_frame, newFragment);
 
