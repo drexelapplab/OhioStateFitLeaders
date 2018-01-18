@@ -42,7 +42,7 @@ public class Activate extends WearableActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 
-        if(pref.getBoolean("LoggedIn", true)){
+        if(pref.getBoolean("LoggedIn_Watch", true)){
             Intent i = new Intent(this, StartWorkout.class);
             startActivity(i);
             finish();
@@ -76,7 +76,7 @@ public class Activate extends WearableActivity {
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();
-                editor.putBoolean("LoggedIn", true);
+                editor.putBoolean("LoggedIn_Watch", true);
                 editor.apply();
 
                 Intent i = new Intent(Activate.this, StartWorkout.class);
