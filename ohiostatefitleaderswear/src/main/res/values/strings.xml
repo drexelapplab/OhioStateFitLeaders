@@ -20,5 +20,5 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="startText">Start Workout</string>
     <string name = "title_activity_start">Start Workout</string>
-
+    <string name = "waitingLbl">Waiting...</string>
 </resources>
