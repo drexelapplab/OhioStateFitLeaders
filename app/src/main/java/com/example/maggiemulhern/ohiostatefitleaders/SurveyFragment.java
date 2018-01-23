@@ -59,16 +59,19 @@ public class SurveyFragment extends Fragment {
             }
         });
 
+        Button btn = rootView.findViewById(R.id.SurveyContinue);
+
         switch (getArguments().getInt("surveyType")) {
             case 0:
                 myWebView.loadUrl("https://osu.az1.qualtrics.com/jfe/form/SV_6KKyV9Fkrm0tygl");
+                btn.setText("Press To Start Workout");
+
                 break;
             case 1:
                 myWebView.loadUrl("https://osu.az1.qualtrics.com/jfe/form/SV_cAdKvfNTIrjQIpD");
+                btn.setText("Press To End Workout");
                 break;
         }
-
-        Button btn = rootView.findViewById(R.id.SurveyContinue);
 
         btn.setOnClickListener(new View.OnClickListener() {
 

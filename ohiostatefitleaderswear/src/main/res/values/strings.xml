@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OhioStateFitLeadersWear</string>
+    <string name="app_name">Ohio State FitLeaders</string>
     <string name="heartRateValue">--</string>
     <string name="stepsValue">--</string>
     <string name="locationText">Inactive</string>
