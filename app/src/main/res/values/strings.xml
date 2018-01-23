@@ -25,7 +25,7 @@
     <string name="data">Data</string>
     <string name="heart_rate">Heart Rate</string>
     <string name="steps">Steps</string>
-    <string name="continue_on">Continue</string>
+    <string name="continue_on">Press To Start Workout</string>
     <string name="title_activity_main_wear">MainWearActivity</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>

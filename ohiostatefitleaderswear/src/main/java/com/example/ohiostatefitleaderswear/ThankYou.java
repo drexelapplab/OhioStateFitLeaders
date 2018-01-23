@@ -13,7 +13,6 @@ public class ThankYou extends WearableActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_thank_you);
-
         Button btn = findViewById(R.id.startOverButton);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -29,5 +28,6 @@ public class ThankYou extends WearableActivity {
 
         // Enables Always-on
         setAmbientEnabled();
+
     }
 }

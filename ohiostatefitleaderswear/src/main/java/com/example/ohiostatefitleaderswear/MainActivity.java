@@ -55,8 +55,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     public static final int MY_PERMISSIONS_REQUEST_BODY_SENSORS = 1;
 
-    public MainActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,8 +169,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 
                 // Switch to thank you Activity
                 Intent i = new Intent(MainActivity.this, ThankYou.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
-
             }
         }, new Response.ErrorListener() {
             @Override

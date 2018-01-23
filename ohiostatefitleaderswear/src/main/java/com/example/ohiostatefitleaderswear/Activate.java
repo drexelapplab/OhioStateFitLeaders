@@ -1,5 +1,7 @@
 package com.example.ohiostatefitleaderswear;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,12 +9,16 @@ import android.support.wearable.activity.WearableActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
 public class Activate extends WearableActivity {
+
+    private static final String TAG = "Activate";   // Tag for logger
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,27 +32,20 @@ public class Activate extends WearableActivity {
         final Button btn = findViewById(R.id.startButton);
         btn.setEnabled(false);
 
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//
-//        // Add the buttons
-//        builder.setTitle("UserID Error");
-//        builder.setMessage("User ID must be 6-8 characters");
-//
-//        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                // User clicked OK button
-//            }
-//        });
-//
-//        AlertDialog dialog = builder.create();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        // Add the buttons
+        builder.setTitle("UserID Error");
+        builder.setMessage("User ID must be 6-8 characters");
 
-        if(pref.getBoolean("LoggedIn_Watch", true)){
-            Intent i = new Intent(this, StartWorkout.class);
-            startActivity(i);
-            finish();
-        }
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+
 
         userID.addTextChangedListener(new TextWatcher() {
                                           @Override
@@ -74,7 +73,7 @@ public class Activate extends WearableActivity {
 
             public void onClick(View v) {
 
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref_Watch", 0); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putBoolean("LoggedIn_Watch", true);
                 editor.apply();
