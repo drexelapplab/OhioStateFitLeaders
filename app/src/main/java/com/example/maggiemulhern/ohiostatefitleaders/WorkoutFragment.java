@@ -21,11 +21,9 @@ import com.google.android.gms.wearable.Wearable;
  * Created by Brandon on 12/12/17.
  */
 
-public class WorkoutFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks {
+public class WorkoutFragment extends Fragment {
 
     private static final String TAG = "WorkoutFragment";
-    private GoogleApiClient mApiClient;
-    private static final String START_ACTIVITY = "/start_activity";
 
     @Nullable
     @Override
@@ -69,43 +67,5 @@ public class WorkoutFragment extends Fragment implements GoogleApiClient.Connect
         });
 
         return rootView;
-    }
-
-
-    private void initGoogleApiClient() {
-        mApiClient = new GoogleApiClient.Builder( this.getContext() )
-                .addApi( Wearable.API )
-                .build();
-
-        mApiClient.connect();
-    }
-
-    private void sendMessage( final String path, final String text ) {
-        new Thread( new Runnable() {
-            @Override
-            public void run() {
-                NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mApiClient ).await();
-                for(Node node : nodes.getNodes()) {
-                    MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
-                            mApiClient, node.getId(), path, text.getBytes() ).await();
-                }
-            }
-        }).start();
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mApiClient.disconnect();
     }
 }

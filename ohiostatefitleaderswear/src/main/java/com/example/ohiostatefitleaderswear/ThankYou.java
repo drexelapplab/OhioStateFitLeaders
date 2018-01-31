@@ -18,9 +18,8 @@ public class ThankYou extends WearableActivity {
         btn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent i = new Intent(ThankYou.this,
-                        Activate.class);
-                // Set certain emails to be put through and others not
+
+                Intent i = new Intent(ThankYou.this, SplashActivity.class);
                 startActivity(i);
             }
 

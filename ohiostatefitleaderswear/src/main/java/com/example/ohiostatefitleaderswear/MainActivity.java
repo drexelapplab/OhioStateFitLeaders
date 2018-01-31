@@ -2,10 +2,17 @@ package com.example.ohiostatefitleaderswear;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.SensorEventListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -35,7 +42,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONObject;
 
@@ -62,20 +68,22 @@ public class MainActivity extends Activity implements SensorEventListener {
         // Initializations
         super.onCreate(savedInstanceState);
 
+        // Check network connection
+
+        checkForNetworkConnection();
+
         // Check for permissions
         checkPermissions();
-
 
         heartRateData = new Vector<>();
         heartRateReadingTimes = new Vector<>();
 
-        Bundle bundle = getIntent().getExtras();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref_Watch", 0);
 
-        try {
-            userID = bundle.getString("userID");
-        }catch (Exception e) {
-            Log.d(TAG, e.getLocalizedMessage());
-        }
+        userID = pref.getString("UserID", "No UserID");
+
+        Log.d(TAG, "User ID: " + userID);
+
 
         // For debugging purposes keep the screen on
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -98,11 +106,12 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         // Register listeners for heart rate and pedometer sensors
         mSensorManager.registerListener(this, heartRateSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(TAG, "HR listener registered.");
+        Log.d(TAG, "HR listener registered.");
 
         final Button submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.d(TAG, "Sending data to server");
                 sendData();
             }
         });
@@ -141,17 +150,61 @@ public class MainActivity extends Activity implements SensorEventListener {
         mSensorManager.unregisterListener(this, heartRateSensor);
     }
 
+    public boolean checkForNetworkConnection() {
+
+        Log.d(TAG, "Checking for Network Connection");
+
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&  activeNetwork.isConnectedOrConnecting();
+
+        String resultString = "Network Connection Found: " + String.valueOf(isConnected);
+        Log.d(TAG, resultString);
+
+        if (isConnected) {
+
+
+            return true;
+        }
+
+        else{
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("FitLeaders");
+            builder.setMessage("Wifi is not connected. Please connect to a wifi network.");
+            builder.setPositiveButton("Enable Wifi",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(
+                                final DialogInterface dialogInterface,
+                                final int i) {
+                            startActivity(new Intent(
+                                    android.provider.Settings.ACTION_WIRELESS_SETTINGS));
+                        }
+                    });
+            builder.create().show();
+
+            return false;
+        }
+
+    }
+
     public void sendData() {
 
         onStop();
+
+        // If we have a network connection
+        checkForNetworkConnection();
 
         // URL to send data
         final String URL = "http://jazz.ece.drexel.edu/FitLeaders/submit.php";
 
         // Create hashmap with parameters
-        Map<String,String> params = new HashMap<>();
-        params.put("hrData",heartRateData.toString());
-        params.put( "hrTimeData", heartRateReadingTimes.toString());
+        Map<String, String> params = new HashMap<>();
+        params.put("hrData", heartRateData.toString());
+        params.put("hrTimeData", heartRateReadingTimes.toString());
         params.put("userID", userID);
 
         // Create a JSON Object
@@ -177,7 +230,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             public void onErrorResponse(VolleyError error) {
                 Log.d(TAG, error.getLocalizedMessage());
             }
-        }){
+        }) {
 
             @Override
             public String getBodyContentType() {
@@ -196,8 +249,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("Content-Type","application/x-www-form-urlencoded");
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
                 return params;
             }
         };

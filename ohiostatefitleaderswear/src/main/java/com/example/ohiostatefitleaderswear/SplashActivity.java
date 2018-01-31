@@ -17,7 +17,9 @@ public class SplashActivity extends WearableActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref_Watch", 0); // 0 - for private mode
 
-        Log.d(TAG, String.valueOf(pref.getBoolean("LoggedIn_Watch", false)));
+        String loginStatusString = "Watch Logged In: " + String.valueOf(pref.getBoolean("LoggedIn_Watch", false));
+
+        Log.d(TAG, loginStatusString);
 
         if(pref.getBoolean("LoggedIn_Watch", false) == false){
             Log.d(TAG, "Going to ActivateScreen");
